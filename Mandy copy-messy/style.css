@@ -1,0 +1,27 @@
+body{
+    background-color: black;
+}
+
+h1{
+    font-family: 'Times New Roman', Times, serif;
+    color: maroon;
+}
+h3{
+    font-family: 'Times New Roman', Times, serif;
+    color: maroon;
+    font-size: larger;
+}
+p{
+    font-family: 'Times New Roman', Times, serif;
+    color: antiquewhite;
+}
+
+li{
+    font-family: 'Times New Roman', Times, serif;
+    color: antiquewhite;
+}
+
+a{
+    font-family: 'Times New Roman', Times, serif;
+    color: antiquewhite;
+}
