@@ -14,7 +14,7 @@ let mandy_angle = 0;
 let mandy_loop_speed_happy = 0.0003;
 let mandy_loop_speed_sad = 0.0008;
 let radius = 22;
-let number = 22;
+let number = 220;
 
 //this is for the invisible circle
 let pathCircleX = 0;
@@ -55,7 +55,7 @@ let timenow;
 let showleaf = true;
 let foodfedMandy = false;
 
-let leafx = 52;
+let leafx = 82;
 let leafy = 40;
 
 let leafcount = 0;
@@ -64,8 +64,8 @@ let showwater = true;
 let waterdragged = false;
 let showwatertext = true;
 
-let waterx = 30;
-let watery = 60;
+let waterx = 49;
+let watery = 62;
 
 let foodNotFed;
 
@@ -74,7 +74,7 @@ let givenwater = false;
 
 function setup() {
   let cnv = createCanvas(800, 500);
-  cnv.parent("p5-canvas-container") 
+  cnv.parent("p5-canvas-container")
   for (let i = 0; i < initalSizeOfArray; i++) {
     xArray[i] = random(0, width);
     yArray[i] = random(0, height);
@@ -101,6 +101,7 @@ function draw() {
     returnHappyBackground();
     returnHappymandy();
   }
+  //console.log(mouseX,mouseY)
 }
 
 function happyBackground() {
@@ -125,7 +126,7 @@ function happyBackground() {
       strokeWeight(2);
       stroke(134, 108, 90, happycircletrans);
     }
-    circle(x, y, shapesize);
+    rect(x, y, shapesize,shapesize);
 
     if (shapecolor2 > 6) {
       noStroke();
@@ -135,7 +136,7 @@ function happyBackground() {
       strokeWeight(2);
       stroke(143, 158, 139, happycircletrans);
     }
-    circle(x, y, shapesize);
+    rect(x, y, shapesize,shapesize);
   }
 }
 
@@ -160,7 +161,7 @@ function sadBackground() {
       noFill();
       stroke(0, 0, 0, sadcircletrans);
     }
-    circle(x, y, shapesize);
+    rect(x, y, shapesize,shapesize);
 
     if (shapecolor2 > 6) {
       noFill();
@@ -169,7 +170,7 @@ function sadBackground() {
       noStroke();
       fill(0, 0, 0, sadcircletrans);
     }
-    circle(x, y, shapesize);
+    rect(x, y, shapesize,shapesize);
   }
   sadcircletransrand += 1;
 }
@@ -209,12 +210,12 @@ function happyMandy() {
   let circleY = pathCircleY + sin(mandy_angle) * 20;
   //its colors and shape
   stroke(r, g, b);
-  strokeWeight(1);
+  strokeWeight(2);
   noFill();
   circle(circleX, circleY, radius);
   //to make it move
   number = number + 1;
-  radius = number % 10;
+  radius = number % 10+15;
   let noiseValue = noise(frameCount * 0.001);
   mandy_loop_speed = map(noiseValue, 0, 1, 0, 0.1);
   mandy_angle = mandy_angle + mandy_loop_speed;
@@ -229,14 +230,20 @@ function thermometer() {
     fill(143, 59, 27);
     barheight = initheight - thermBars;
     rect(xpos, thermBars + 10, 30, barheight);
-    thermBars -= 0.22;
-    //barheight+=9
+    thermBars -= 0.058;
   }
   //when it reaches certain level, the puddle evaporates
   if (thermBars <= 0 && isMandyHappy == true) {
     isMandyHappy = false;
     msSinceDry = millis();
     timeSinceMandyfed = msSinceDry;
+  }
+  if (barheight<99){
+    let printtemp=barheight
+    textSize(15)
+    text(int(printtemp)+"°F",712,20)
+  }else{
+    textSize(0.1)
   }
 }
 
@@ -265,11 +272,12 @@ function sadMandy() {
   let circleX = pathCircleX + cos(mandy_angle) * 20;
   let circleY = pathCircleY + sin(mandy_angle) * 20;
   //mandy
+  strokeWeight(2);
   stroke(r, g, b);
   noFill();
   circle(circleX, circleY, radius);
   number = number + 1;
-  radius = number % 10;
+  radius = number % 10 + 15;
   let noiseValue = noise(frameCount * 0.0001);
   mandy_loop_speed = map(noiseValue, 0, 1, 0, 0.05);
   mandy_angle = mandy_angle + mandy_loop_speed;
@@ -286,16 +294,17 @@ function sadMandy() {
   if (showleaf == true) {
     noStroke();
     fill(143, 158, 139);
+    textSize(20)
     text("feed me", 10, 40);
     text("🥬", leafx, leafy);
   }
   //will run when leaf is pressed
   if (
     mouseIsPressed == true &&
-    mouseX >= 40 &&
-    mouseX <= 60 &&
+    mouseX >= 85 &&
+    mouseX <= 105 &&
     mouseY >= 20 &&
-    mouseY <= 40
+    mouseY <= 45
   ) {
     leafcount += 1;
     foodfedMandy = true;
@@ -322,10 +331,10 @@ function sadMandy() {
   }
   if (
     mouseIsPressed == true &&
-    mouseX >= 20 &&
-    mouseX <= 40 &&
-    mouseY >= 50 &&
-    mouseY <= 70
+    mouseX >= 53 &&
+    mouseX <= 73 &&
+    mouseY >= 44 &&
+    mouseY <= 64
   ) {
     waterdragged = true;
     showwatertext = false;
@@ -347,8 +356,8 @@ function sadMandy() {
     returnHappymandy();
   } else {
     if (
-      (timeSinceDry > 12000 && timenow > 3000) ||
-      (timeSinceDry > 24000 && givenwater == false && foodfedMandy == false)
+      (timeSinceDry > 48000 && timenow > 3000) ||
+      (timeSinceDry > 96000 && givenwater == false && foodfedMandy == false)
     ) {
       sadEnd();
     }
@@ -377,7 +386,7 @@ function returnHappyBackground() {
       strokeWeight(2);
       stroke(134, 108, 90);
     }
-    circle(x, y, shapesize);
+    rect(x, y, shapesize,shapesize);
 
     if (shapecolor2 > 6) {
       noStroke();
@@ -387,7 +396,7 @@ function returnHappyBackground() {
       strokeWeight(2);
       stroke(143, 158, 139);
     }
-    circle(x, y, shapesize);
+    rect(x, y, shapesize,shapesize);
   }
 }
 
@@ -419,38 +428,33 @@ function returnHappymandy() {
   let circleY = pathCircleY + sin(mandy_angle) * 20;
   //its colors and shape
   stroke(r, g, b);
-  strokeWeight(1);
+  strokeWeight(2);
   noFill();
   circle(circleX, circleY, radius);
   //to make it move
   number = number + 1;
-  radius = number % 10;
+  radius = number % 10+15;
   let noiseValue = noise(frameCount * 0.001);
   mandy_loop_speed = map(noiseValue, 0, 1, 0, 0.001);
   mandy_angle = mandy_angle + mandy_loop_speed;
 
   let timeSinceMandyreturn = millis() - msSincemandyreturn;
   if (timeSinceMandyreturn > 6000) {
-    happyEnd();
+    //happyEnd();
+    stroke(76, 5, 107);
+  fill(76, 5, 107);
+  text("Thank you for helping mandy survive. You win!!", 210, 469);
   }
 }
 
-function happyEnd() {
-  //this comes when mandy comes back to its happy environmenst and stays there for a bit
-  background(252, 243, 227);
-  //strokeWeight(2)
-  stroke(76, 5, 107);
-  fill(76, 5, 107);
-  text("Thank you for helping mandy survive. You win!!", 300, 250);
-}
 
 function sadEnd() {
   //this is when mandy is not fed or is not bought back to happy environment for 2 mins
   background(143, 59, 27);
-  stroke(0);
+  noStroke();
   fill(0);
-  text("Mandy is dead 😭", 380, 250);
-  text("It was either not fed or lived without a puddle for 2 mins.",320,270)
+  text("Mandy is dead 😭", 315, 211);
+  text("It was either not fed or lived without a puddle for 2 mins.",200,235)
 }
 
 // from https://stackoverflow.com/a/9614122
