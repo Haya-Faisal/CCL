@@ -36,17 +36,17 @@ class Elmo {
     this.x = startX;
     this.y = startY;
     // add properties for your dancer here:
-    this.legheight=100
-    this.isleg150=false
-    this.headsize=70
-    this.handx=0
-    this.feetangle=0
-    this.feetspeed=4
+    this.legheight = 30
+    this.isleg50 = false
+    this.headsize = 25
+    this.handx = 0
+    this.feetangle = 0
+    this.feetspeed = 4
   }
   update() {
     // update properties here to achieve
     // your dancer's desired moves and behaviour
-    this.feetangle+=this.feetspeed
+    this.feetangle += this.feetspeed
   }
   display() {
     // the push and pop, along with the translate 
@@ -58,121 +58,115 @@ class Elmo {
     // ******** //
     // ⬇️ draw your dancer from here ⬇️
 
-    let xRad=radians(this.handx)
-    let sinout=sin(xRad)*50;
+    let xRad = radians(this.handx)
+    let sinout = sin(xRad) * 50;
 
-    let circlex=200+sinout;
-    let circley=100+sinout
-    
-    if (this.isleg150==false){
-      stroke(105,4,4)
+    let circlex = 0 + sinout-40;
+    let circley = 0 + sinout -40
+
+    if (this.isleg50 == false) {
+      stroke(105, 4, 4)
       fill(255, 0, 0)
       // Arms
       // ellipse(137, 225, 30, 80); // Left arm
       // ellipse(254, 225, 30, 80); // Right arm
 
       // Legs
-      quad(160,300,190,300,190,380,160,380)
-      quad(200,300,230,300,230,380,200,380)
+      quad( - 20, 0 + 30, 0 - 5, 0 + 30, 0 - 5, 0 + 70, 0 - 20, 0 + 70)
+      quad(0, 0 + 30, 0 + 15, 0 + 30, 0 + 15, 0 + 70, 0, 0 + 70)
       this.legheight++;
 
-      this.drawfeet(166,370)
-      this.drawfeet(225,370)
+      
 
       // Body
       fill(255, 0, 0);
-      ellipse(200, 250, 115, 150);
-  
-     // Head
-     fill(255, 0, 0);
-      ellipse(200, 150, this.headsize, this.headsize);
+      ellipse(0, 0, 57, 75);
+
+      // Head
+      fill(255, 0, 0);
+      ellipse(0,0 - 75, this.headsize, this.headsize);
       this.headsize++;
 
-    // Eyes
-    fill(255);
-    ellipse(185, 100, 30, 40);
-    ellipse(215, 100, 30, 40);
-  
-    // Pupils
-    fill(0);
-    ellipse(190, 100, 10, 10);
-    ellipse(210, 100, 10, 10);
+      // Eyes
+      fill(255);
+      ellipse(0 + 15, 0 - 100, 15, 20);
+      ellipse(0 - 15, 0 - 100, 15, 20);
 
-    // Nose
-    fill(255, 135, 0);
-    ellipse(200, 135, 30, 37);
+      // Pupils
+      fill(0);
+      ellipse(0 - 10, 0 - 100, 5, 5);
+      ellipse(0 + 10, 0- 100, 5, 5);
 
-    // Mouth
-    fill(0);
-    arc(200, 160, 60, 40, 0, PI, CHORD);
-    if (this.legheight>150){
-      this.isleg150=true
-     }
-  }
-  if (this.isleg150==true){
-    stroke(105,4,4)
-  
-    fill(255, 0, 0)
-    // Arms
-    // ellipse(137, 225, 30, 80); // Left arm
-    // ellipse(254, 225, 30, 80); // Right arm
+      // Nose
+      fill(255, 135, 0);
+      ellipse(0, 0 - 90, 15, 18);
 
-    // Legs
-    quad(160,300,190,300,190,380,160,380)
-    quad(200,300,230,300,230,380,200,380)
-    this.legheight--;
+      // Mouth
+      fill(0);
+      arc(0-10, 0 - 70, 60, 40, 0, PI / 2, CHORD / 2);
 
-    this.drawfeet(166,370)
-    this.drawfeet(225,370)
-
-    // Body
-    fill(255, 0, 0);
-    ellipse(200, 250, 115, 150);
-  
-    // Head
-    fill(255, 0, 0);
-    ellipse(200, 150, this.headsize, this.headsize);
-    this.headsize--;
-
-    // Eyes
-    fill(255);
-    ellipse(185, 100, 30, 40);
-    ellipse(215, 100, 30, 40);
-  
-    // Pupils
-    fill(0);
-    ellipse(190, 100, 10, 10);
-    ellipse(210, 100, 10, 10);
-
-    // Nose
-    fill(255, 135, 0);
-    ellipse(200, 135, 30, 37);
-
-    // Mouth
-    fill(0);
-    arc(200, 160, 60, 40, 0, PI, CHORD);
-    if (this.legheight<100){
-      this.isleg150=false
+      this.drawfeet(0-10, 0+70)
+      this.drawfeet(0+15, 0+70)
+      if (this.legheight > 100) {
+        this.isleg50 = true
+      }
     }
-  }
-  // Hands
-    stroke(105,4,4)
-    fill(255, 0, 0)
-    ellipse(circlex-40, circley, 40, 40); // Left hand
-    ellipse(circlex+40, circley, 40, 40); // Right hand
-  this.handx++;
+    if (this.isleg50 == true) {
+      stroke(105, 4, 4)
 
-  drawfeet(x,y){
-    push()
-    translate(x,y)
-    rotate(radians(this.feetangle));
-    stroke(105,4,4);
-    fill(255, 0, 0);
-    ellipse(0,0,60,30);
-    pop()
-  }    
+      fill(255, 0, 0)
+      // Arms
+      // ellipse(137, 225, 30, 80); // Left arm
+      // ellipse(254, 225, 30, 80); // Right arm
+
+      // Legs
+      quad( - 20, 0 + 30, 0 - 5, 0 + 30, 0 - 5, 0 + 70, 0 - 20, 0 + 70)
+      quad(0, 0 + 30, 0 + 15, 0 + 30, 0 + 15, 0 + 70, 0, 0 + 70)
+      this.legheight--;
+
+      // Body
+      fill(255, 0, 0);
+      ellipse(0,0, 57, 75);
+
+      // Head
+      fill(255, 0, 0);
+      ellipse(0, 0- 75, this.headsize, this.headsize);
+      this.headsize--;
+
+      // Eyes
+      fill(255);
+      ellipse(0 - 15, 0 - 100, 15, 20);
+      ellipse(0 + 15, 0 - 100, 15, 20);
+
+      // Pupils
+      fill(0);
+      ellipse(0 - 10, 0- 100, 5, 5);
+      ellipse(0 + 10, 0 - 100, 5, 5);
+
+      // Nose
+      fill(255, 135, 0);
+      ellipse(0, 0 - 90, 15, 18);
+
+      // Mouth
+      fill(0);
+      arc(0-10, 0 - 70, 60, 40, 0, PI / 2, CHORD / 2);
+
+      this.drawfeet(0-10, 0+70)
+      this.drawfeet(0+15, 0+70)
+      if (this.legheight < 50) {
+        this.isleg50 = false
+      }
+    }
+    // Hands
+    stroke(105, 4, 4)
+    fill(255, 0, 0)
+    ellipse(circlex - 40, circley, 40, 40); // Left hand
+    ellipse(circlex + 40, circley, 40, 40); // Right hand
+    this.handx++;
+
     
-  
+
+
     // ⬆️ draw your dancer above ⬆️
     // ******** //
 
@@ -185,6 +179,16 @@ class Elmo {
     this.drawReferenceShapes()
 
     pop();
+  }
+  drawfeet(x, y){
+    push()
+    translate(x, y)
+    rotate(radians(this.feetangle));
+    stroke(105, 4, 4);
+    fill(255, 0, 0);
+    ellipse(0, 0, 30, 15);
+    pop()
+
   }
   drawReferenceShapes() {
     noFill();

@@ -44,7 +44,7 @@ function draw() {
     m.display();
   }
 
-  // delete confetti whose "onCanvas" value is false
+  // delete metroid whose "onCanvas" value is false
   for (let i = metroids.length - 1; i >= 0; i--) {
     // check its onCanvas value
     if (metroids[i].onCanvas == false) {
