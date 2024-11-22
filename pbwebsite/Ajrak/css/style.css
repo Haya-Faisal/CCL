@@ -1,0 +1,44 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+canvas {
+  display: block;
+}
+
+.main{
+  background-color:maroon;
+}
+
+h1{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: antiquewhite;
+  font-size:xx-large;
+  display: flex;
+  margin: 10px; 
+  justify-content: center;
+}
+
+.description{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: antiquewhite;
+  display: flex;
+  margin: 10px; 
+  justify-content: center;
+}
+.flexbuttons{
+  display: flex;
+  margin: 10px; 
+  justify-content: center;
+  align-items: center;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: medium;
+  color: antiquewhite;
+}
+
+.buttone{
+  padding-block: 10px;
+  max-width: 30%;
+  margin: 30px;
+}

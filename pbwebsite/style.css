@@ -1,0 +1,68 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+canvas {
+  display: block;
+}
+
+.main{
+  background-color:antiquewhite;
+}
+h1{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color:cadetblue;
+  font-size:xx-large;
+  display: flex;
+  margin: 10px; 
+  justify-content: center;
+}
+
+.ajrek{
+  display: flex;
+  margin: 10px; 
+  justify-content: center;
+  align-items: center;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: medium;
+  color: antiquewhite;
+}
+
+.link{
+  padding-block: 10px;
+  max-width: 30%;
+  margin: 30px;
+}
+
+.dabki{
+  display: flex;
+  margin: 10px; 
+  justify-content: center;
+  align-items: center;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: medium;
+  color: antiquewhite;
+}
+
+.links{
+  padding-block: 10px;
+  max-width: 30%;
+  margin: 30px;
+}
+
+.lungi{
+  display: flex;
+  margin: 10px; 
+  justify-content: center;
+  align-items: center;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: medium;
+  color: antiquewhite;
+}
+
+.linke{
+  padding-block: 10px;
+  max-width: 30%;
+  margin: 30px;
+}
