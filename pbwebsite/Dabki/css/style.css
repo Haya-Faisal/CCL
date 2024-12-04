@@ -9,7 +9,6 @@ html, body {
 
 .main{
   background-color: rgb(26, 90, 54);
-  /* margin: auto; */
   display: flex;
   flex-direction: column;
 }
@@ -45,12 +44,4 @@ h1{
   padding-block: 10px;
   max-width: 30%;
   margin: 30px;
-}
-.sketch{
-  display: flex;
-  justify-content: center;
-}
-
-#p5-canvas-container {
-  margin: auto;
 }

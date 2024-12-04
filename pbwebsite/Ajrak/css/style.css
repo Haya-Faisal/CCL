@@ -9,6 +9,8 @@ canvas {
 
 .main{
   background-color:maroon;
+  display: flex;
+  flex-direction: column;
 }
 
 h1{
