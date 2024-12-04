@@ -20,6 +20,15 @@ h1{
   justify-content: center;
 }
 
+.instruc{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: antiquewhite;
+  font-size:large;
+  display: flex;
+  margin: 10px; 
+  justify-content: center;
+}
+
 .description{
   font-family: Georgia, 'Times New Roman', Times, serif;
   color: antiquewhite;

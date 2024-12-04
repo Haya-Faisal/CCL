@@ -43,3 +43,7 @@ h1{
   max-width: 30%;
   margin: 30px;
 }
+.sketch{
+  display: flex;
+  justify-content: center;
+}
