@@ -1,6 +1,7 @@
 html, body {
   margin: 0;
   padding: 0;
+  background-color:antiquewhite;
 }
 
 canvas {
@@ -10,16 +11,23 @@ canvas {
 .main{
   background-color:antiquewhite;
 }
+
+img {
+  object-fit: cover;
+}
+
+
 h1{
+  background-color: cadetblue;
   font-family: Georgia, 'Times New Roman', Times, serif;
-  color:cadetblue;
+  color:antiquewhite;
   font-size:xx-large;
   display: flex;
-  margin: 10px; 
+  margin: 2px; 
   justify-content: center;
 }
 
-.ajrek{
+/* .ajrek{
   display: flex;
   margin: 10px; 
   justify-content: center;
@@ -65,4 +73,65 @@ h1{
   padding-block: 10px;
   max-width: 30%;
   margin: 30px;
+} */
+
+.citation{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: cadetblue;
+  font-size:x-small;
+  display: flex;
+  margin: 10px; 
+  justify-content: center;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+/* the amin logic and some parts of the below code are taken from the below website */
+/* https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_image_overlay_opacity */
+.pics {
+  display: flex;
+  margin: 10%; 
+  justify-content: center;
+  align-items: center;
+  /* position: relative;
+  width: 50%; */
+}
+
+.format {
+  padding-block: 10px;
+  max-width: 30%;
+  margin: 30px;
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+  position: relative;
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.format:hover .image {
+  opacity: 0.3;
+}
+
+.format:hover .middle {
+  opacity: 1;
+}
+
+.text {
+  background-color: cadetblue;
+  color: antiquewhite;
+  font-size: 16px;
+  padding: 16px 32px;
 }

@@ -1,6 +1,7 @@
 html, body {
   margin: 0;
   padding: 0;
+  background-color:maroon;
 }
 
 canvas {
@@ -22,6 +23,15 @@ h1{
   justify-content: center;
 }
 
+h2{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: antiquewhite;
+  font-size:large;
+  display: flex;
+  margin-top: 0%;
+  justify-content: center;
+}
+
 .instruc{
   font-family: Georgia, 'Times New Roman', Times, serif;
   color: antiquewhite;
@@ -29,6 +39,8 @@ h1{
   display: flex;
   margin: 10px; 
   justify-content: center;
+  padding-right: 20%;
+  padding-left: 20%;
 }
 
 .description{
@@ -37,6 +49,10 @@ h1{
   display: flex;
   margin: 10px; 
   justify-content: center;
+  font-size: large;
+  margin-top: 10px;
+  padding-right: 20%;
+  padding-left: 20%;
 }
 .flexbuttons{
   display: flex;
@@ -52,4 +68,11 @@ h1{
   padding-block: 10px;
   max-width: 30%;
   margin: 30px;
+}
+
+.pfwrapper{
+  width:100%;
+  display: flex;
+  margin: 10px; 
+  justify-content: center;
 }

@@ -1,6 +1,7 @@
 html, body {
   margin: 0;
   padding: 0;
+  background-color: rgb(26, 90, 54);
 }
 
 /* canvas {
@@ -9,6 +10,7 @@ html, body {
 
 .main{
   background-color: rgb(26, 90, 54);
+  background-size: cover;
   display: flex;
   flex-direction: column;
 }
@@ -22,12 +24,32 @@ h1{
   justify-content: center;
 }
 
+h3{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: antiquewhite;
+  font-size:large;
+  display: flex;
+  margin-top: 0%;
+  justify-content: center;
+}
+
+.ins{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: antiquewhite;
+  font-size: large;
+  display: flex;
+  margin: 10px; 
+  justify-content: center;
+}
 .descriptione{
   font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: large;
   color: antiquewhite;
   display: flex;
   margin: 10px; 
   justify-content: center;
+  padding-right: 20%;
+  padding-left: 20%;
 }
 
 .flexbutton{
@@ -44,4 +66,11 @@ h1{
   padding-block: 10px;
   max-width: 30%;
   margin: 30px;
+}
+
+.pfwrappe{
+  width:100%;
+  display: flex;
+  margin: 10px; 
+  justify-content: center;
 }

@@ -3,6 +3,7 @@
   let canvas = createCanvas(500, 400);
   canvas.parent("p5-canvas-container");
   noLoop()
+  noCursor()
 }
 
 function draw() {
@@ -62,5 +63,8 @@ function drawDiamond(size) {
 }
 
 function mouseMoved() {
-  redraw(); // Redraw the grid when the mouse moves away
+  // Redraw only if the mouse is inside the canvas
+  if (mouseX >= 0 && mouseX < width && mouseY >= 0 && mouseY < height) {
+    redraw(); // Dynamically redraw the grid when the mouse moves
+  }
 }
