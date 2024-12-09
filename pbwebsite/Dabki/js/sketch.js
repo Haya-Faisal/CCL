@@ -61,11 +61,15 @@ class Dabki{
     this.placey=placey
   }
   update(){
-    for (let i=0;i<rotibasket.length;i++){
-      if (rotibasket[0].posy>300){
-        this.placex=lerp(this.placex,rotibasket[0].posx,0.5)
+    //let maxindex=0
+    let maxvalue=0
+      for(let j=0;j<rotibasket.length-1;j++){
+        if(rotibasket[j].posy>370){
+         // maxindex=rotibasket[j]
+          maxvalue=rotibasket[j].posx
+          this.placex=lerp(this.placex,maxvalue,0.5)
+        } 
       }
-    }
   }
 
   display(){

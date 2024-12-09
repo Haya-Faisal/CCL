@@ -1,66 +1,147 @@
-let symmetry = 4; // Number of symmetries
-let angle;
+let symmetricDrawing;
+let livingRoom;
+let currentMode = 'drawing'; // Add this to track current display mode
+
 function setup() {
   let canvas = createCanvas(500, 400);
   canvas.parent("p5-canvas-container");
-  angle = 360 / symmetry; // Angle for each segment
-  background(0,0,148);
+  background(0, 0, 148);
+  symmetricDrawing = new SymmetricDrawing(width, height);
+  livingRoom = new Livingroom();
 }
 
-
 function draw() {
-  translate(width / 2, height / 2); // Move the origin to the center
-  if (mouseIsPressed) {
-    let mx = mouseX - width / 2; // Adjust mouse position to canvas center
-    let my = mouseY - height / 2; //takes the x&y coor of current location 
-    let pmx = pmouseX - width / 2; //take it of previous location
-    let pmy = pmouseY - height / 2;
-
-    for (let i = 0; i < symmetry; i++) {
-      rotate(radians(angle)); // Rotate to the next segment. it increase angle after each circle is drawn resulting in it being drawn in all 4 segs
-      strokeWeight(5);
-      stroke(102,0,51); //need to make it more redder
-      line(mx, my, pmx, pmy); // Draw the main stroke
-      strokeWeight(0.5);
-      stroke(255);
-      linedash(mx, my, pmx, pmy, 4);
-      push();
-      scale(1, -1); // Mirror vertically
-      strokeWeight(5);
-      stroke(102,0,51);
-      line(mx, my, pmx, pmy); // Draw the mirrored stroke
-      strokeWeight(0.5);
-      stroke(255);
-      linedash(mx, my, pmx, pmy, 4);
-      pop();
-    }
+  if (currentMode === 'drawing') {
+    symmetricDrawing.draw();
   }
 }
 
 function keyPressed() {
   if (key === 'c' || key === 'C') {
-    background(0,0,148); // Clear canvas when 'C' is pressed
+    symmetricDrawing.keyPressed();
+    currentMode = 'drawing';
+  }
+  if (key === 's' || key === 'S') {
+    currentMode = 'livingroom';
+    livingRoom.draw();
+    let patternWidth = 370 / 10; // Divide the ajrak width by 10
+    let patternHeight = 120 / 3;  // Divide the ajrak height by 3
+    
+    for(let y = 0; y < 3; y++) {
+      for(let x = 0; x < 10; x++) {
+        let xPos = 50 + (x * patternWidth);
+        let yPos = 266 + (y * patternHeight);
+        image(symmetricDrawing.getCanvas(), xPos, yPos, patternWidth, patternHeight);
+      }
+    }
+
   }
 }
 
-//I got the below code from here
-// https://github.com/processing/p5.js/issues/3336
 
-function linedash(x1, y1, x2, y2, delta) {
-  // delta determines the length of dashes and spaces
-  let distance = dist(x1, y1, x2, y2); // Total distance
-  let dashNumber = floor(distance / delta); // Number of dashes
-  let xDelta = (x2 - x1) / dashNumber; // X increment per segment
-  let yDelta = (y2 - y1) / dashNumber; // Y increment per segment
+class SymmetricDrawing {
+  constructor(canvasWidth, canvasHeight, symmetry = 4) {
+    this.symmetry = symmetry;
+    this.angle = 360 / this.symmetry;
+    this.canvasWidth = canvasWidth;
+    this.canvasHeight = canvasHeight;
+    this.canvas = createGraphics(canvasWidth, canvasHeight);
+    this.canvas.background(0, 0, 148);
+  }
 
-  for (let i = 0; i < dashNumber; i += 2) {
-    // Coordinates for the start and end of each dash
-    let xi1 = i * xDelta + x1;
-    let yi1 = i * yDelta + y1;
-    let xi2 = (i + 1) * xDelta + x1;
-    let yi2 = (i + 1) * yDelta + y1;
+  draw() {
+    this.canvas.push();
+    this.canvas.translate(this.canvasWidth/2, this.canvasHeight/2);
+    if (mouseIsPressed) {
+      let mx = mouseX - this.canvasWidth / 2;
+      let my = mouseY - this.canvasHeight / 2;
+      let pmx = pmouseX - this.canvasWidth / 2;
+      let pmy = pmouseY - this.canvasHeight / 2;
 
-    // Draw each dash
-    line(xi1, yi1, xi2, yi2);
+      for (let i = 0; i < this.symmetry; i++) {
+        this.canvas.rotate(radians(this.angle));
+        this.drawStroke(mx, my, pmx, pmy);
+        this.canvas.push();
+        this.canvas.scale(1, -1);
+        this.drawStroke(mx, my, pmx, pmy);
+        this.canvas.pop();
+      }
+    }
+    this.canvas.pop();
+    image(this.canvas, 0, 0);
+  }
+
+  drawStroke(mx, my, pmx, pmy) {
+    this.canvas.strokeWeight(5);
+    this.canvas.stroke(102, 0, 51);
+    this.canvas.line(mx, my, pmx, pmy);
+    this.canvas.strokeWeight(0.5);
+    this.canvas.stroke(255);
+    this.linedash(mx, my, pmx, pmy, 4);
+  }
+
+  keyPressed() {
+    this.canvas.background(0, 0, 148);
+  }
+
+  ////I got the below code from here
+  // https://github.com/processing/p5.js/issues/3336
+  linedash(x1, y1, x2, y2, delta) {
+    let distance = dist(x1, y1, x2, y2);
+    let dashNumber = floor(distance / delta);
+    let xDelta = (x2 - x1) / dashNumber;
+    let yDelta = (y2 - y1) / dashNumber;
+
+    for (let i = 0; i < dashNumber; i += 2) {
+      let xi1 = i * xDelta + x1;
+      let yi1 = i * yDelta + y1;
+      let xi2 = (i + 1) * xDelta + x1;
+      let yi2 = (i + 1) * yDelta + y1;
+      this.canvas.line(xi1, yi1, xi2, yi2);
+    }
+  }
+
+  getCanvas() {
+    return this.canvas;
+  }
+}
+
+class Livingroom {
+  constructor() {
+    
+  }
+
+  draw() {
+    background(0,148,148);
+    
+    //bookshelf
+    for (let y = 30; y < 300; y += 60) {
+      fill(211, 204, 198);
+      rect(10, y, 455, 3);
+      
+      //books
+      for (let x = 10; x < 470; x += 20) {
+        let r = random() * 50 + 200;
+        let g = random() * 50 + 200;
+        let b = random() * 50 + 200;
+        fill(r, g, b);
+        rect(x, y - 50, 15, 50);
+      }
+    }
+    //window seat
+    fill(232, 228, 224);
+    rect(40, 240, 390, 150);
+    
+    //ajrek
+    fill(0, 0, 148);
+    rect(60, 266, 350, 40);
+    
+    //pillow
+    fill(0,218,218);
+    rect(70, 250, 40, 40);
+    rect(120, 250, 40, 40);
+    rect(320, 250, 40, 40);
+    
+    
   }
 }

@@ -97,17 +97,21 @@ h1{
   width: 50%; */
 }
 
-.format {
-  padding-block: 10px;
-  max-width: 30%;
-  margin: 30px;
-  opacity: 1;
-  display: block;
+
+.format{
+      /* padding-block: 10px; */
+      max-width: 30%;
+      margin: 30px;
+      opacity: 1;
+      /* display: block; */
+      /* width: 100%; */
+      /* height: auto; */
+      transition: .5s ease;
+      backface-visibility: hidden;
+      position: relative;
+}
+.format img{
   width: 100%;
-  height: auto;
-  transition: .5s ease;
-  backface-visibility: hidden;
-  position: relative;
 }
 
 .middle {

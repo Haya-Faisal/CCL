@@ -1,70 +1,107 @@
- let cellSize=40;//size of each grid
- function setup() {
+let lungiPattern;
+let frozencells = [];
+
+function setup() {
   let canvas = createCanvas(500, 400);
   canvas.parent("p5-canvas-container");
-  noLoop()
-  noCursor()
+  noLoop();
+  noCursor();
+  lungiPattern = new LungiPattern(40, 0);
 }
 
 function draw() {
-  background(250,235,215);
-
-  for (let y = 0; y < height; y += cellSize) {
-    for (let x = 0-15; x < width+20; x += cellSize) {
-      // Checking if mouse is over this diamond
-      let isMouseOver = mouseX > x && mouseX < x + cellSize 
-      && mouseY > y && mouseY < y + cellSize;
-      // Draw the lungi pattern
-      drawlungipattern(x, y, isMouseOver);
-    }
-  }
-}
-
-function drawlungipattern(x,y,isBold) {
-  if (isBold){
-    basecolor=color(0,139,139)
-    strokewieghtvalue=3
-  }else{
-    r=map(x,0,width,0,255)
-    b=map(y,0,height,0,255)
-    basecolor=color(r,0,b)
-    strokewieghtvalue=1
-  }
-
-  push();
-  //this makes sure only one cell is colored at once.
-  translate(x + cellSize / 2, y + cellSize / 2); // Move to the center of the cell. 
-  stroke(basecolor);
-  strokeWeight(strokewieghtvalue);
-  fill(250,235,215); // center color of dia
-  
-  // Outer most diamond
-  drawDiamond(cellSize - random(1,4));
-
-  // Outer diamond
-  drawDiamond(cellSize - 10);
-
-  // Inner diamonds (random sizes)
-  for (let i = 0; i < 2; i++) {
-    let size = random(10, cellSize - 20);
-    drawDiamond(size);
-  }
-  pop();
-
-}
-
-function drawDiamond(size) {
-  beginShape();
-  vertex(0, -size / 2); // Top
-  vertex(size / 2, 0); // Right
-  vertex(0, size / 2); // Bottom
-  vertex(-size / 2, 0); // Left
-  endShape(CLOSE);
+  lungiPattern.update();
+  lungiPattern.draw();
 }
 
 function mouseMoved() {
-  // Redraw only if the mouse is inside the canvas
-  if (mouseX >= 0 && mouseX < width && mouseY >= 0 && mouseY < height) {
-    redraw(); // Dynamically redraw the grid when the mouse moves
+  lungiPattern.mouseMoved();
+}
+
+class LungiPattern {
+  constructor(cellSize, angle) {
+    this.cellSize = cellSize;
+    this.angle = angle;
+
+    this.isclicked=false
+  }
+
+  update() {
+    let numb=random(10)
+    if(this.isclicked){
+      this.angle -= 0.11;
+    }else{
+      this.angle += 0.01;
+    }
+  }
+
+  draw() {
+    background(250, 235, 215);
+
+    for (let y = 0; y < height; y += this.cellSize) {
+      for (let x = -15; x < width + 20; x += this.cellSize) {
+        //used to turn the diamond blue
+        let isMouseOver = mouseX > x && mouseX < x + this.cellSize && mouseY > y && mouseY < y + this.cellSize;              
+        this.drawPattern(x, y, isMouseOver,this.angle);
+        
+        if (mouseIsPressed && isMouseOver){
+          this.isclicked=true
+        }
+
+      }
+    }
+  }
+
+  drawPattern(x, y, isBold,  angle) {
+    let baseColor;
+    let strokeWeightValue;
+
+    if (isBold) {
+      baseColor = color(0, 139, 139);
+      strokeWeightValue = 3;
+    } else {
+      let r = map(x, 0, width, 0, 255);
+      let b = map(y, 0, height, 0, 255);
+      baseColor = color(r, 0, b);
+      strokeWeightValue = 1;
+    }
+
+    push();
+    translate(x + this.cellSize / 2, y + this.cellSize / 2);
+    stroke(baseColor);
+    strokeWeight(strokeWeightValue);
+    fill(250, 235, 215);
+
+    // Outer most diamond
+   this.drawDiamond(this.cellSize - random(1,4),angle);
+
+   // Outer diamond
+   this.drawDiamond(this.cellSize - 10,angle);
+
+   // Inner diamonds (random sizes)
+   for (let i = 0; i < 2; i++) {
+     let size = random(10, this.cellSize - 20);
+     this.drawDiamond(size,this.angle);
+   }
+
+    pop();
+  }
+
+  drawDiamond(size, angle) {
+    push();
+    rotate(angle);
+    beginShape();
+    vertex(0, -size / 2);
+    vertex(size / 2, 0);
+    vertex(0, size / 2);
+    vertex(-size / 2, 0);
+    endShape(CLOSE);
+    pop();
+  }
+
+  mouseMoved() {
+    if (mouseX >= 0 && mouseX < width && mouseY >= 0 && mouseY < height) {
+      redraw();
+    }
   }
 }
