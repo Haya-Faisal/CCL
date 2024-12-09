@@ -45,9 +45,9 @@ class LungiPattern {
         this.drawPattern(x, y, isMouseOver,this.angle);
         
         if (mouseIsPressed && isMouseOver){
+          console.log('hi')
           this.isclicked=true
         }
-
       }
     }
   }
