@@ -31,6 +31,7 @@ function keyPressed() {
       for(let x = 0; x < 10; x++) {
         let xPos = 50 + (x * patternWidth);
         let yPos = 266 + (y * patternHeight);
+        //copying what was drawn onto the new blanket. the class symmetricdrawing returns the design
         image(symmetricDrawing.getCanvas(), xPos, yPos, patternWidth, patternHeight);
       }
     }
@@ -45,6 +46,8 @@ class SymmetricDrawing {
     this.angle = 360 / this.symmetry;
     this.canvasWidth = canvasWidth;
     this.canvasHeight = canvasHeight;
+    //making the whole canvas into graphics
+    //learned from here  https://www.bing.com/videos/riverview/relatedvideo?q=creategraphics+p5+js&ru=%2fsearch%3fq%3dcreategraphics%2bp5%2bjs%26FORM%3dQSRE1&mmscn=vwrc&mid=1DD2BBE106C8EB9F5A641DD2BBE106C8EB9F5A64&FORM=WRVORC
     this.canvas = createGraphics(canvasWidth, canvasHeight);
     this.canvas.background(0, 0, 148);
   }
@@ -68,6 +71,7 @@ class SymmetricDrawing {
       }
     }
     this.canvas.pop();
+
     image(this.canvas, 0, 0);
   }
 
@@ -133,8 +137,9 @@ class Livingroom {
     rect(40, 240, 390, 150);
     
     //ajrek
-    fill(0, 0, 148);
-    rect(60, 266, 350, 40);
+    //drawn in key pressed
+    // fill(0, 0, 148);
+    // rect(60, 266, 350, 40);
     
     //pillow
     fill(0,218,218);
