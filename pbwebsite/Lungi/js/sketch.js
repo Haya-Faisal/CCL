@@ -27,10 +27,19 @@ class LungiPattern {
   }
 
   update() {
-    let numb=random(10)
-    if(this.isclicked){
-      this.angle -= 0.11;
-    }else{
+    
+    //making the diamonds rotate according to the position of the mouse
+    //top left
+    if(mouseX > 0 && mouseX < 250 && mouseY > 0 && mouseY < 200){
+      this.angle -= 0.04;
+      //bottom left
+    }else if(mouseX > 250 && mouseX < 500 && mouseY > 0 && mouseY < 250){
+      this.angle += 0.05;
+      //top right
+    }else if(mouseX > 0 && mouseX < 250 && mouseY > 200 && mouseY < 400){
+      this.angle -= 0.01;
+      //bottom right
+    }else if(mouseX > 250 && mouseX < 500 && mouseY > 200 && mouseY < 400){
       this.angle += 0.01;
     }
   }
@@ -43,11 +52,12 @@ class LungiPattern {
         //used to turn the diamond blue
         let isMouseOver = mouseX > x && mouseX < x + this.cellSize && mouseY > y && mouseY < y + this.cellSize;              
         this.drawPattern(x, y, isMouseOver,this.angle);
-        
-        if (mouseIsPressed && isMouseOver){
-          console.log('hi')
-          this.isclicked=true
-        }
+
+        //this function never worked
+        // if (mouseIsPressed && isMouseOver){
+        //   console.log('hi')
+        //   this.isclicked=true
+        // }
       }
     }
   }
